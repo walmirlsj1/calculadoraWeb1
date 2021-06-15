@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/calculadora.css">
+    
+    
+</head>
+
+<body>
+    <article class="calculadora">
+        <section class="historico">
+                <i>Historico:</i>
+                <div class="historico-list">
+                    ...<br>
+                    ...<br>
+                    ...<br>
+                    ...<br>
+                    ...<br>
+                    ...<br>
+                    ...<br>
+                    ...<br>
+                    ...<br>
+                    ...<br>
+                    ...<br>
+                    ...<br>
+                    ...<br>
+                </div>
+        </section>
+        <section class="visor" style="min-width: 350px;">
+            <input type="text" id="visor-input" class="visor-input" value="-(10*5)/4-0.2">
+            <span type="text" id="visor-temp" class="visor-temp">teste 1010</span>
+        </section>
+        <section class="teclado">
+            <!-- // (  )  %  /
+                    7  8  9  *
+                    4  5  6  -
+                    1  2  3  +
+                    .  0 CE  =    
+                -->
+            <button name="button">(</button>
+            <button name="button">)</button>
+            <button name="button">%</button>
+            <button name="button">/</button>
+            <button name="button">7</button>
+            <button name="button">8</button>
+            <button name="button">9</button>
+            <button name="button">*</button>
+            <button name="button">4</button>
+            <button name="button">5</button>
+            <button name="button">6</button>
+            <button name="button">-</button>
+            <button name="button">1</button>
+            <button name="button">2</button>
+            <button name="button">3</button>
+            <button name="button">+</button>
+            <button name="button">.</button>
+            <button name="button">0</button>
+            <button name="button">CE</button>
+            <button name="button" style="background-color: chartreuse;">=</button>
+        </section>
+
+    </article>
+    <script src="./scripts/calculadora.js"></script>
+</body>
+
+</html>

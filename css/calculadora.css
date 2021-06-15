@@ -1,0 +1,60 @@
+body {
+  background-color: #ccc;
+}
+/**
+efeitos legais css
+    -webkit-text-emphasis: circle;
+    -webkit-text-emphasis: filled;
+    -webkit-text-emphasis: dot;
+    -webkit-text-emphasis: double-circle;
+*/
+.calculadora {
+  background-color: #dcdcd6;
+  padding: 10px;
+  border-radius: 5px;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+.visor > .visor-temp {
+    position: relative;
+    display: table;
+    top: -60px;
+    width: 343px;
+    height: 10px;
+}
+.visor > .visor-input {
+  height: 55px;
+  width: 343px;
+  font-size: 30px;
+  text-align: right;
+}
+
+.teclado > button {
+  font-size: 18px;
+  width: 84px;
+  height: 40px;
+  margin-top: 10px;
+}
+.historico {
+  width: 340px;
+  height: 150px;
+  background-color: #efefef;
+  padding: 5px;
+}
+
+.historico-list {
+  overflow: scroll;
+  height: 125px;
+  text-align: right;
+  padding: 5px;
+}
+
+.teclado {
+  max-width: 350px;
+}
+
+.errorOperation {
+  border-color: red;
+  border-style: dotted;
+}
