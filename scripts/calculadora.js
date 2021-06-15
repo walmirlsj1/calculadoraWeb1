@@ -1,39 +1,78 @@
+
 // document.getElementById("button").addEventListener("click", teste);
 var visorTemp = document.getElementById("visor-temp");
 var visor = document.getElementById("visor-input");
-document.getElementsByName("button").forEach(f => (f.addEventListener("click", teste)));
-document.getElementById("visor-input").addEventListener("keyup", preCalcular);
+document.getElementsByName("button").forEach(f => (f.addEventListener("click", pegaElementoValue)));
+// document.getElementById("visor-input").("keyup", preCalcular);
+document.addEventListener('keyup', processaTeclado);
 // document.getElementById("visor-input").addEventListener("keyDown", preCalcular);
 let statusFalha = false;
 
-function teste(event1) {
+function processaTeclado(keyEvent) {
+    // teste()
+    // 96 - 105 111 106 109 107 57 48 53 [0-9] / * - + ( ) %
+    // 110 108 . , // converte pra ponto
+    // 13 187 enter = funcao igual
+    const key = eval(keyEvent.keyCode);
+    const keyName = keyEvent.key;
+    keyEvent.preventDefault();
+    
+    console.log("keyCode: " + key)
+    if ((key > 95 && key <= 105)
+        || key == 111
+        || key == 106
+        || key == 109
+        || key == 107
+        || key == 57
+        || key == 48
+        || key == 53) {
+        teste(keyName);
+    } else if (key == 13 || key == 187) {
+        teste('=');
+    } else if (key == 108 || key == 110) {
+        teste('.');
+    } else if(key == 8){
+        teste("CE");
+    } else if(key == 27){
+        visor.value = "";
+        visorTemp.value = "";
+    }
+}
+
+function pegaElementoValue(elementEvent) {
+    
+    teste(elementEvent.toElement.innerHTML);
+}
+
+function teste(entrada) {
     //event1.toElement.innerHTML
     // visor.value(event1.toElement.innerHTML);
-    var entrada = event1.toElement.innerHTML;
+
     var value = visor.value;
     switch (entrada) {
         case "CE":
             if (value.length > 0) {
-                value = value.substring(0, value.length - 1);
+                visor.value = value.substring(0, value.length - 1);
                 preCalcular();
             }
             break;
         case "=":
             // var temp = value;
             preCalcular();
-            if(statusFalha) return false;
-            value = calcular();
+            if (statusFalha) return false;
+            visor.value = calcular();
             // visorTemp.innerHTML = "ans: " + temp;
             break;
+        // case "":
         default:
-            value += entrada;
+            visor.value += entrada;
             preCalcular();
     }
-    visor.value = value;
+    
 }
 
 
-function calcular(){
+function calcular() {
     var result = preCalcular();
     visorTemp.innerText = visor.value;
     return result;
@@ -49,7 +88,7 @@ function preCalcular() {
         statusFalha = true;
         visor.classList.add("errorOperation")
     }
-    
+
     visorTemp.innerHTML = "result: " + value;
     return value;
 }
@@ -60,6 +99,8 @@ var p = 0;
 
 function calc(fita) {
     // this.fita = fita;
+    fita = fita.replace('÷', '/');
+
     this.fita = fita;
     stack = [];
     p = 0;
@@ -71,7 +112,7 @@ function calc(fita) {
     if (p < fita.length && calcula) {
         texto += " até a posicao: " + (p);
         // console.log(texto);
-        
+
         throw new Error("texto");
     }
     // alert(texto);
@@ -149,7 +190,7 @@ function F() {
         }
     }
     var n = Num();
-    if(match('%')){
+    if (match('%')) {
         calcula('%');
     }
     return n;
