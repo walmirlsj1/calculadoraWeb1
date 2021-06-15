@@ -1,7 +1,11 @@
 // document.getElementById("button").addEventListener("click", teste);
-document.getElementsByName("button").forEach(f => (f.addEventListener("click", teste)));
+var visorTemp = document.getElementById("visor-temp");
 var visor = document.getElementById("visor-input");
-document.getElementById("visor-input").addEventListener("change", testarExpressao)
+document.getElementsByName("button").forEach(f => (f.addEventListener("click", teste)));
+document.getElementById("visor-input").addEventListener("keyup", preCalcular);
+// document.getElementById("visor-input").addEventListener("keyDown", preCalcular);
+let statusFalha = false;
+
 function teste(event1) {
     //event1.toElement.innerHTML
     // visor.value(event1.toElement.innerHTML);
@@ -9,26 +13,44 @@ function teste(event1) {
     var value = visor.value;
     switch (entrada) {
         case "CE":
-            if (value.length > 0)
+            if (value.length > 0) {
                 value = value.substring(0, value.length - 1);
+                preCalcular();
+            }
             break;
         case "=":
-            value = testarExpressao(value);
+            // var temp = value;
+            preCalcular();
+            if(statusFalha) return false;
+            value = calcular();
+            // visorTemp.innerHTML = "ans: " + temp;
             break;
         default:
             value += entrada;
+            preCalcular();
     }
     visor.value = value;
 }
-function testarExpressao(entrada) {
+
+
+function calcular(){
+    var result = preCalcular();
+    visorTemp.innerText = visor.value;
+    return result;
+}
+function preCalcular() {
     var value = NaN;
     try {
-        value = calc(entrada);
+        statusFalha = false;
+        value = calc(visor.value);
         visor.classList.remove("errorOperation")
     } catch (e) {
         console.log(e);
+        statusFalha = true;
         visor.classList.add("errorOperation")
     }
+    
+    visorTemp.innerHTML = "result: " + value;
     return value;
 }
 
@@ -48,11 +70,12 @@ function calc(fita) {
     var texto = "Exp " + fita + " valida: " + calcula;
     if (p < fita.length && calcula) {
         texto += " até a posicao: " + (p);
+        // console.log(texto);
+        
         throw new Error("texto");
     }
     // alert(texto);
     var result = stack.pop();
-
     return result;// 
     // console.log(texto + " resultado " + stack.pop());
     // console.log("---");
@@ -62,7 +85,7 @@ function calc(fita) {
 function calcula(op) {
     var v1 = stack.pop();
     var v2 = stack.pop();
-
+    console.log(v1, v2, op);
     var result = 0;
     switch (op) {
         case '*':
@@ -77,8 +100,13 @@ function calcula(op) {
         case '-':
             result = v2 - v1;
             break;
+        case '%':
+            stack.push(v2);
+            result = v1 / 100;
+            break;
         default:
     }
+    // console.log(op)
     // if (signal != '') result = 0 - result;
     stack.push(result);
 
@@ -110,18 +138,21 @@ function T() {
 }
 
 function F() {
-    var signal = '';
     if (match('-') && (fita[p] == '(' || p == 1) && F()) {
         // corrige signal negativo 14/06/2021
         stack.push(0 - stack.pop());
         return true;
-    } else
+    } else {
         if (match('(')) {
             E();
-
             return match(')');;
         }
-    return Num();
+    }
+    var n = Num();
+    if(match('%')){
+        calcula('%');
+    }
+    return n;
 }
 
 function Num() {
@@ -173,9 +204,9 @@ function Num() {
                 else erro = true; //return false;;
                 break;
             case 4:
-                if (fita[p] >= '0' && fita[p] <= '9')
+                if (fita[p] >= '0' && fita[p] <= '9') {
                     s = 4;
-                else {
+                } else {
                     stack.push((valor + (valorDir / Math.pow(10, contadorDir))) * signal);
                     return true;
                 }
@@ -203,7 +234,4 @@ function match(valor) {
         return true;
     }
     return false;
-}
-function validarCalculadora() {
-
 }

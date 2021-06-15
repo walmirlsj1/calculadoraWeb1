@@ -22,6 +22,7 @@ efeitos legais css
     top: -60px;
     width: 343px;
     height: 10px;
+    text-align: right;
 }
 .visor > .visor-input {
   height: 55px;
