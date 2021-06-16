@@ -1,9 +1,6 @@
 import { maquinaCalculadora } from './maquina.js';
 
-document.getElementsByName("button").forEach(f => (f.addEventListener("click", pegaElementoValue)));
-document.getElementsByName("historico-temp").forEach(f => (f.addEventListener("dblclick", voltaInput)));
-document.addEventListener('keypress', eventoTecladoKeyPress);
-document.addEventListener('keydown', eventoTecladoKeyDown);
+
 
 let lastExp;
 let statusFalha = false;
@@ -15,6 +12,10 @@ const historico = document.getElementById("historico-list");
 visor.addEventListener('focus', visorFocus);
 visor.addEventListener('focusout', visorFocusOut);
 
+document.getElementsByName("button").forEach(f => (f.addEventListener("click", pegaElementoValue)));
+document.getElementsByName("historico-temp").forEach(f => (f.addEventListener("dblclick", voltaInput)));
+document.addEventListener('keypress', eventoTecladoKeyPress);
+document.addEventListener('keydown', eventoTecladoKeyDown);
 
 
 function visorFocus(){
@@ -32,10 +33,11 @@ export function voltaInput(e) {
 }
 
 function eventoTecladoKeyDown(evt) {
-    if (evt.target.className !== "visor-input") {
+    if (evt.target.className != "visor") {
         switch (evt.keyCode) {
             case 8:
                 actionCalcular("CE");
+                evt.preventDefault(); //
                 break;
             case 27:
                 visor.value = "";
