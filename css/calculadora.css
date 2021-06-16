@@ -16,15 +16,18 @@ efeitos legais css
   margin-left: auto;
   margin-right: auto;
 }
+.visor {
+}
 .visor > .visor-temp {
-    position: relative;
-    display: table;
-    top: -60px;
-    width: 343px;
-    height: 10px;
-    text-align: right;
+  position: relative;
+  display: table;
+  top: -60px;
+  width: 343px;
+  height: 10px;
+  text-align: right;
 }
 .visor > .visor-input {
+  background-color: transparent;
   height: 55px;
   width: 343px;
   font-size: 30px;
@@ -43,14 +46,24 @@ efeitos legais css
   background-color: #efefef;
   padding: 5px;
 }
-
+.historico-header {
+  text-align: center;
+  padding: 5px 5px 0 5px;
+}
 .historico-list {
   overflow: scroll;
-  height: 125px;
+  height: 103px;
   text-align: right;
   padding: 5px;
 }
-
+.historico-item {
+  
+}
+.historico-temp {
+  padding: 1px 2px;
+  border-width: 2px;
+  border-style: groove;
+}
 .teclado {
   max-width: 350px;
 }
