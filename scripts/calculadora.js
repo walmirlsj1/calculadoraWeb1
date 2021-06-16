@@ -4,16 +4,25 @@ var visorTemp = document.getElementById("visor-temp");
 var visor = document.getElementById("visor-input");
 var historico = document.getElementById("historico-list");
 document.getElementsByName("button").forEach(f => (f.addEventListener("click", pegaElementoValue)));
+document.getElementsByName("historico-temp").forEach(f => (f.addEventListener("dblclick", voltaInput)));
+
 document.addEventListener('keypress', processaTeclado);
 document.addEventListener('keydown', processaTecladoEspecial);
 
 var lastExp;
 
 let statusFalha = false;
+
+export function voltaInput(e) {
+    // console.log("clickou no elemento");
+    visor.value = e.toElement.innerText;
+    visorTemp.value = "result: 0";
+    preCalcular();
+}
 function processaTecladoEspecial(evt) {
     if (evt.target.className != "visor-input") {
         switch (evt.keyCode) {
-            case '8':
+            case 8:
                 actionCalcular("CE");
                 break;
             case 27:
@@ -22,6 +31,7 @@ function processaTecladoEspecial(evt) {
                 break;
         }
     }
+    console.log(evt.keyCode);
 
 }
 function processaTeclado(keyEvent) {
@@ -90,6 +100,7 @@ function salvarExpressao(valor) {
         '</div>';
 
     historico.innerHTML = historico.getInnerHTML() + element;
+    historico.scrollTop = historico.scrollHeight;
 }
 
 function calcular() {
