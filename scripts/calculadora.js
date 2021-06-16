@@ -1,26 +1,38 @@
 import { maquinaCalculadora } from './maquina.js';
 
-var visorTemp = document.getElementById("visor-temp");
-var visor = document.getElementById("visor-input");
-var historico = document.getElementById("historico-list");
 document.getElementsByName("button").forEach(f => (f.addEventListener("click", pegaElementoValue)));
 document.getElementsByName("historico-temp").forEach(f => (f.addEventListener("dblclick", voltaInput)));
+document.addEventListener('keypress', eventoTecladoKeyPress);
+document.addEventListener('keydown', eventoTecladoKeyDown);
 
-document.addEventListener('keypress', processaTeclado);
-document.addEventListener('keydown', processaTecladoEspecial);
-
-var lastExp;
-
+let lastExp;
 let statusFalha = false;
+const visorContainer = document.getElementById("visorContainer");
+const visor = document.getElementById("visor");
+const visorTemp = document.getElementById("visor-temp");
+const historico = document.getElementById("historico-list");
+
+visor.addEventListener('focus', visorFocus);
+visor.addEventListener('focusout', visorFocusOut);
+
+
+
+function visorFocus(){
+    visorContainer.classList.add("visor-active");
+}
+
+function visorFocusOut(){
+    visorContainer.classList.remove("visor-active");
+}
 
 export function voltaInput(e) {
-    // console.log("clickou no elemento");
     visor.value = e.toElement.innerText;
     visorTemp.value = "result: 0";
     preCalcular();
 }
-function processaTecladoEspecial(evt) {
-    if (evt.target.className != "visor-input") {
+
+function eventoTecladoKeyDown(evt) {
+    if (evt.target.className !== "visor-input") {
         switch (evt.keyCode) {
             case 8:
                 actionCalcular("CE");
@@ -31,10 +43,10 @@ function processaTecladoEspecial(evt) {
                 break;
         }
     }
-    console.log(evt.keyCode);
 
 }
-function processaTeclado(keyEvent) {
+
+function eventoTecladoKeyPress(keyEvent) {
 
     const key = keyEvent.keyCode;
     const keyName = keyEvent.key;
@@ -91,16 +103,15 @@ function actionCalcular(entrada) {
     }
 
 }
+
 function salvarExpressao(valor) {
-    // visor.value
-    
     var element =  '<div style="display: inline-flex;">' +
-        '<span type="text" class="historico-temp" value="' + visor.value + '" style="width: 200px;" readonly>'+visor.value+'</span>' +
-        '<span type="text" class="historico-temp" value="' + valor + '" style="width: 90px;" readonly>'+valor+'</span>' +
+        '<span type="text" class="historico-temp" style="width: 200px;" readonly>'+visor.value+'</span>' +
+        '<span type="text" class="historico-temp" style="width: 90px;" readonly>'+valor+'</span>' +
         '</div>';
 
     historico.innerHTML = historico.getInnerHTML() + element;
-    historico.scrollTop = historico.scrollHeight;
+    historico.scrollTop = historico.scrollHeight; // move scroll bar pro ultimo elemento adicionado*
 }
 
 function calcular() {
@@ -108,16 +119,17 @@ function calcular() {
     visorTemp.innerText = visor.value;
     return result;
 }
+
 function preCalcular() {
     var value = NaN;
     try {
         statusFalha = false;
         value = maquinaCalculadora(visor.value);
-        visor.classList.remove("errorOperation")
+        visorContainer.classList.remove("errorOperation");
     } catch (e) {
         console.log(e);
         statusFalha = true;
-        visor.classList.add("errorOperation")
+        visorContainer.classList.add("errorOperation");
     }
 
     visorTemp.innerHTML = "result: " + value;

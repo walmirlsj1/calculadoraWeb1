@@ -1,18 +1,18 @@
 export { maquinaCalculadora };
-var stack = [];
-var fita = [];
-var p = 0;
+let stack = [];
+let fita = [];
+let p = 0;
 
 function maquinaCalculadora(fita1) {
     fita = fita1.replace('÷', '/');
 
     stack = [];
     p = 0;
-    var calcula = false;
+    let calcula = false;
 
     calcula = expressao();
 
-    var texto = "Exp " + fita + " valida: " + calcula;
+    let texto = "Exp " + fita + " valida: " + calcula;
     if (p < fita.length && calcula) {
         texto += " até a posicao: " + (p);
         throw new Error(texto);
@@ -20,12 +20,11 @@ function maquinaCalculadora(fita1) {
     return stack.pop();
 }
 
-
 function calcula(op) {
-    var v1 = stack.pop();
-    var v2 = stack.pop();
+    const v1 = stack.pop();
+    const v2 = stack.pop();
 
-    var result = 0;
+    let result = 0;
     switch (op) {
         case '*':
             result = v2 * v1;
@@ -51,7 +50,7 @@ function calcula(op) {
 
 function expressao() {
     if (termo()) {
-        var pp = p;
+        const pp = p;
         if (match('+') || match('-')) {
             if (!expressao()) return false;
             calcula(fita[pp]);
@@ -64,7 +63,7 @@ function expressao() {
 
 function termo() {
     if (fator()) {
-        var pp = p;
+        const pp = p;
         if (match('*') || match('/')) {
             if (!termo()) return false;
             calcula(fita[pp]);
@@ -85,7 +84,7 @@ function fator() {
             return match(')');;
         }
     }
-    var n = numero();
+    const n = numero();
     if (match('%')) {
         calcula('%');
     }
@@ -93,13 +92,13 @@ function fator() {
 }
 
 function numero() {
-    var estado = 0;
-    var contadorDir = 0;
-    var valor = 0.0;
-    var valorDir = 0.0;
-    var erro = false;
-    var signal = 1.0;
-    var f = false; // float?
+    let estado = 0;
+    let contadorDir = 0;
+    let valor = 0.0;
+    let valorDir = 0.0;
+    let erro = false;
+    let signal = 1.0;
+    let f = false; // float?
 
     while (true) {
         switch (estado) {
@@ -163,7 +162,6 @@ function numero() {
         p++;
     }
 }
-
 
 function match(valor) {
     if (valor == fita[p]) {

@@ -1,6 +1,7 @@
 body {
-  background-color: #ccc;
+    background-color: #ccc;
 }
+
 /**
 efeitos legais css
     -webkit-text-emphasis: circle;
@@ -9,87 +10,101 @@ efeitos legais css
     -webkit-text-emphasis: double-circle;
 */
 .calculadora {
-  background-color: #5d5d58; /* #dcdcd6 */
-  padding: 10px;
-  border-radius: 5px;
-  display: table;
-  margin-left: auto;
-  margin-right: auto;
+    background-color: #5d5d58; /* #dcdcd6 */
+    padding: 10px;
+    border-radius: 5px;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
 }
-.visor {
-  min-width: 347px;
-  border-style: solid;
-  border: 1px;
-  background-color: whitesmoke;
-  padding-top: 18px;
-  height: 38px;
 
-  background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
-  border-width: 2px;
-  border-style: inset;
-  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-  border-image: initial;
-  border-radius: 0 0 5px 5px;
+.visorContainer {
+    min-width: 347px;
+    background-color: whitesmoke;
+    padding-top: 18px;
+    height: 38px;
+    border-width: 2px;
+    border-style: inset;
+    border-radius: 0 0 5px 5px;
 }
-.visor > .visor-temp {
-  position: relative;
-  display: table;
-  top: -59px;
-  width: 343px;
-  height: 10px;
-  text-align: right;
+.visor-active {
+    border-color: #5d5d58;
+    border-style: double;
 }
-.visor > .visor-input {
-  background-color: transparent;
-  height: 39px;
-  width: 343px;
-  font-size: 30px;
-  text-align: right;
-  border-style: none;
+.visorContainer > .visor-temp {
+    position: relative;
+    display: table;
+    top: -59px;
+    width: 343px;
+    height: 10px;
+    text-align: right;
+}
+
+.visorContainer > .visor {
+    background-color: transparent;
+    height: 39px;
+    width: 343px;
+    font-size: 30px;
+    text-align: right;
+    border-style: none;
+}
+
+.visorContainer > .visor:focus {
+    outline: none !important;
+    /*outline: none !important;*/
+    /*border:1px solid red;*/
+    /*box-shadow: 0 0 10px #719ECE;*/
 }
 
 .historico {
-  width: 340px;
-  height: 150px;
-  background-color: #efefef;
-  padding: 5px;
+    width: 340px;
+    height: 150px;
+    background-color: #efefef;
+    padding: 5px;
 }
+
 .historico-header {
-  text-align: center;
-  padding: 5px 5px 0 5px;
+    text-align: center;
+    padding: 5px 5px 0 5px;
 }
+
 .historico-list {
-  overflow: scroll;
-  height: 103px;
-  text-align: right;
-  padding: 5px;
+    overflow: scroll;
+    height: 103px;
+    text-align: right;
+    padding: 5px;
 }
+
 .historico-item {
-  display: inline-flex;
+    display: inline-flex;
 }
+
 .historico-temp {
-  padding: 1px 2px;
-  border-width: 2px;
-  border-style: groove;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: groove;
 }
+
 .teclado {
-  max-width: 350px;
-  text-align: center;
+    max-width: 350px;
+    text-align: center;
 }
 
 .teclado > button {
-  /* font-size: 18px; */
-  width: 84px;
-  height: 40px;
-  margin-top: 10px;
-  font-weight: bolder;
-  font-size: x-large;
+    /* font-size: 18px; */
+    width: 84px;
+    height: 40px;
+    margin-top: 10px;
+    font-weight: bolder;
+    font-size: x-large;
 }
+
 .errorOperation {
-  border-color: red;
-  border-style: dotted;
+    border-color: red;
+    border-style: dotted;
 }
+
 .btnResolve {
-  background-color: #545651;
-  color: white;
+    background-color: #545651;
+    color: white;
 }

@@ -8,8 +8,6 @@
     <title>Calculadora</title>
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/calculadora.css">
-
-
 </head>
 
 <body>
@@ -21,23 +19,10 @@
                 <span type="text" style="width: 90px;" readonly="">Resultado</span>
             </div>
             <div class="historico-list" id="historico-list">
-                <!-- <div style="display: inline-flex;">
-                        <input type="text" class="historico-temp" style="width: 200px;" readonly>
-                        <input type="text" class="historico-temp" style="width: 90px;" readonly>
-                    </div> -->
-                <div class="historico-item" style="display: inline-flex;">
-                    <span type="text" class="historico-temp" name="historico-temp"
-                        style="width: 200px;" readonly>
-                        6+3
-                    </span>
-                        <span type="text" class="historico-temp" name="historico-temp"
-                        style="width: 90px;" readonly>9</span>
-                </div>
-            
             </div>
         </section>
-        <section class="visor">
-            <input type="text" id="visor-input" class="visor-input" placeholder="-(10*5)÷4-0.2" value=""
+        <section class="visorContainer" id="visorContainer">
+            <input type="text" id="visor" class="visor" placeholder="-(10*5)÷4-0.2" value=""
                 onkeypress="return false;">
             <span type="text" id="visor-temp" class="visor-temp">result: 0</span>
         </section>
