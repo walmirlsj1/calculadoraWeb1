@@ -1,4 +1,6 @@
-import { maquinaCalculadora } from './maquina.js';
+// import {maquinaCalculadora} from './maquina.js';
+
+import {trataExpressao} from "./tratamento.js";
 
 let lastExp;
 let statusFalha = false;
@@ -16,11 +18,11 @@ document.addEventListener('keypress', eventoTecladoKeyPress);
 document.addEventListener('keydown', eventoTecladoKeyDown);
 
 
-function visorFocus(){
+function visorFocus() {
     visorContainer.classList.add("visor-active");
 }
 
-function visorFocusOut(){
+function visorFocusOut() {
     visorContainer.classList.remove("visor-active");
 }
 
@@ -51,26 +53,26 @@ function eventoTecladoKeyPress(keyEvent) {
     const key = keyEvent.keyCode;
     const keyName = keyEvent.key;
 
-    try {
-        if (key == 47) {
-            actionCalcular('÷');
-        } else if ((key > 47 && key <= 57)
-            || key == 37
-            || key == 42 || key == 45
-            || key == 43 || key == 40
-            || key == 41
-        ) {
-            actionCalcular(keyName);
-        } else if (key == 13 || key == 43) {
-            actionCalcular('=');
-        } else if (key == 46 || key == 44) {
-            actionCalcular('.');
-        } else {
-            keyEvent.preventDefault();
-        }
-    } catch (error) {
-        console.log("erro evento eventoTecladoKeyPress");
+    // try {
+    if (key == 47) {
+        actionCalcular('÷');
+    } else if ((key > 47 && key <= 57)
+        || key == 37
+        || key == 42 || key == 45
+        || key == 43 || key == 40
+        || key == 41
+    ) {
+        actionCalcular(keyName);
+    } else if (key == 13 || key == 43) {
+        actionCalcular('=');
+    } else if (key == 46 || key == 44) {
+        actionCalcular('.');
+    } else {
+        keyEvent.preventDefault();
     }
+    // } catch (error) {
+    //     console.log("erro evento eventoTecladoKeyPress");
+    // }
 }
 
 function pegaElementoValue(elementEvent) {
@@ -91,11 +93,11 @@ function actionCalcular(entrada) {
             if (statusFalha) return false;
 
             const temp = calcular();
-            if(lastExp == visor.value) return false;
+            if (lastExp == visor.value) return false;
             lastExp = temp;
             salvarExpressao(temp);
             visor.value = temp;
-            
+
             break;
         default:
             visor.value += entrada;
@@ -105,9 +107,9 @@ function actionCalcular(entrada) {
 }
 
 function salvarExpressao(valor) {
-    var element =  '<div style="display: inline-flex;">' +
-        '<span type="text" class="historico-temp" name="historico-temp" style="width: 200px;" readonly>'+visor.value+'</span>' +
-        '<span type="text" class="historico-temp" name="historico-temp" style="width: 90px;" readonly>'+valor+'</span>' +
+    var element = '<div style="display: inline-flex;">' +
+        '<span type="text" class="historico-temp" name="historico-temp" style="width: 200px;" readonly>' + visor.value + '</span>' +
+        '<span type="text" class="historico-temp" name="historico-temp" style="width: 90px;" readonly>' + valor + '</span>' +
         '</div>';
 
     historico.innerHTML = historico.getInnerHTML() + element;
@@ -125,9 +127,8 @@ function preCalcular() {
     let value = NaN;
     try {
         statusFalha = false;
-        let valorInput= visor.value;
-        valorInput = valorInput.replaceAll('÷', '/');
-        value = eval(valorInput);
+        const expresao = trataExpressao(visor.value)
+        value = eval(expresao);
         // value = maquinaCalculadora(visor.value);
         visorContainer.classList.remove("errorOperation");
     } catch (e) {
