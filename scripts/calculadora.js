@@ -69,11 +69,10 @@ function pegaElementoValue(elementEvent) {
 }
 
 function actionCalcular(entrada) {
-    var value = visor.value;
     switch (entrada) {
         case "CE":
-            if (value.length > 0) {
-                visor.value = value.substring(0, value.length - 1);
+            if (visor.value.length > 0) {
+                visor.value = visor.value.substring(0, visor.value.length - 1);
             }
             break;
         case "=":
