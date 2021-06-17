@@ -1,7 +1,5 @@
 import { maquinaCalculadora } from './maquina.js';
 
-
-
 let lastExp;
 let statusFalha = false;
 const visorContainer = document.getElementById("visorContainer");
@@ -29,6 +27,7 @@ function visorFocusOut(){
 export function voltaInput(e) {
     visor.value = e.toElement.innerText;
     visorTemp.value = "result: 0";
+    console.log("dbclick")
     preCalcular();
 }
 
@@ -37,7 +36,7 @@ function eventoTecladoKeyDown(evt) {
         switch (evt.keyCode) {
             case 8:
                 actionCalcular("CE");
-                evt.preventDefault(); //
+                evt.preventDefault();
                 break;
             case 27:
                 visor.value = "";
@@ -45,7 +44,6 @@ function eventoTecladoKeyDown(evt) {
                 break;
         }
     }
-
 }
 
 function eventoTecladoKeyPress(keyEvent) {
@@ -71,7 +69,7 @@ function eventoTecladoKeyPress(keyEvent) {
             keyEvent.preventDefault();
         }
     } catch (error) {
-
+        console.log("erro evento eventoTecladoKeyPress");
     }
 }
 
@@ -91,8 +89,8 @@ function actionCalcular(entrada) {
         case "=":
             preCalcular();
             if (statusFalha) return false;
-            
-            var temp = calcular();
+
+            const temp = calcular();
             if(lastExp == visor.value) return false;
             lastExp = temp;
             salvarExpressao(temp);
@@ -108,12 +106,13 @@ function actionCalcular(entrada) {
 
 function salvarExpressao(valor) {
     var element =  '<div style="display: inline-flex;">' +
-        '<span type="text" class="historico-temp" style="width: 200px;" readonly>'+visor.value+'</span>' +
-        '<span type="text" class="historico-temp" style="width: 90px;" readonly>'+valor+'</span>' +
+        '<span type="text" class="historico-temp" name="historico-temp" style="width: 200px;" readonly>'+visor.value+'</span>' +
+        '<span type="text" class="historico-temp" name="historico-temp" style="width: 90px;" readonly>'+valor+'</span>' +
         '</div>';
 
     historico.innerHTML = historico.getInnerHTML() + element;
     historico.scrollTop = historico.scrollHeight; // move scroll bar pro ultimo elemento adicionado*
+    document.getElementsByName("historico-temp").forEach(f => (f.addEventListener("dblclick", voltaInput)));
 }
 
 function calcular() {
@@ -123,10 +122,13 @@ function calcular() {
 }
 
 function preCalcular() {
-    var value = NaN;
+    let value = NaN;
     try {
         statusFalha = false;
-        value = maquinaCalculadora(visor.value);
+        let valorInput= visor.value;
+        valorInput = valorInput.replaceAll('÷', '/');
+        value = eval(valorInput);
+        // value = maquinaCalculadora(visor.value);
         visorContainer.classList.remove("errorOperation");
     } catch (e) {
         console.log(e);

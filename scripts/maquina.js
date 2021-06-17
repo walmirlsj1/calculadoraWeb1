@@ -4,7 +4,7 @@ let fita = [];
 let p = 0;
 
 function maquinaCalculadora(fita1) {
-    fita = fita1.replace('÷', '/');
+    fita = fita1.replaceAll('÷', '/');
 
     stack = [];
     p = 0;
