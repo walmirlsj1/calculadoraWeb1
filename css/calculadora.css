@@ -9,6 +9,14 @@ efeitos legais css
     -webkit-text-emphasis: dot;
     -webkit-text-emphasis: double-circle;
 */
+.expressao{
+    width: 220px;
+}
+
+.resultado {
+    width: 90px;
+}
+
 .calculadora {
     background-color: #5d5d58; /* #dcdcd6 */
     padding: 10px;
@@ -18,7 +26,7 @@ efeitos legais css
     margin-right: auto;
 }
 
-.visorContainer {
+.visor-container {
     min-width: 347px;
     background-color: whitesmoke;
     padding-top: 18px;
@@ -31,7 +39,7 @@ efeitos legais css
     border-color: #5d5d58;
     border-style: double;
 }
-.visorContainer > .visor-temp {
+.visor-container > .visor-temp {
     position: relative;
     display: table;
     top: -59px;
@@ -40,7 +48,7 @@ efeitos legais css
     text-align: right;
 }
 
-.visorContainer > .visor {
+.visor-container > .visor {
     background-color: transparent;
     height: 39px;
     width: 343px;
@@ -49,7 +57,7 @@ efeitos legais css
     border-style: none;
 }
 
-.visorContainer > .visor:focus {
+.visor-container > .visor:focus {
     outline: none !important;
     /*outline: none !important;*/
     /*border:1px solid red;*/
@@ -66,6 +74,7 @@ efeitos legais css
 .historico-header {
     text-align: center;
     padding: 5px 5px 0 5px;
+    display: inline-flex;
 }
 
 .historico-list {
@@ -99,12 +108,12 @@ efeitos legais css
     font-size: x-large;
 }
 
-.errorOperation {
+.error-operation {
     border-color: red;
     border-style: dotted;
 }
 
-.btnResolve {
+.btn-resolve {
     background-color: #545651;
     color: white;
 }

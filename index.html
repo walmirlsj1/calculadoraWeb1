@@ -14,25 +14,25 @@
     <article class="calculadora">
         <section class="historico">
             <b>Historico:</b> <i>Dois clicks recuperam historico na lista.</i>
-            <div class="historico-header" style="display: inline-flex;">
-                <span type="text" style="width: 220px;" readonly="">Expressao</span>
-                <span type="text" style="width: 90px;" readonly="">Resultado</span>
+            <div class="historico-header">
+                <span type="text" class="expressao">Expressao</span>
+                <span type="text" class="resultado">Resultado</span>
             </div>
-            <div class="historico-list" id="historico-list">
+            <div class="historico-list" id="historicoList">
 
             </div>
         </section>
-        <section class="visorContainer" id="visorContainer">
+        <section class="visor-container" id="visorContainer">
             <input type="text" id="visor" class="visor" placeholder="-(10*5)÷4-0.2" value=""
                 onkeypress="return false;">
-            <span type="text" id="visor-temp" class="visor-temp">result: 0</span>
+            <span type="text" id="visorTemp" class="visor-temp">result: 0</span>
         </section>
         <section class="teclado">
             <!-- // (  )  %  /
                     7  8  9  *
                     4  5  6  -
                     1  2  3  +
-                    .  0 CE  =    
+                    .  0 CE  =
                 -->
             <button name="button">(</button>
             <button name="button">)</button>
@@ -53,9 +53,8 @@
             <button name="button">.</button>
             <button name="button">0</button>
             <button name="button">CE</button>
-            <button name="button" class="btnResolve">=</button>
+            <button name="button" class="btn-resolve">=</button>
         </section>
-
     </article>
     <script src="scripts/calculadora.js" type="module"></script>
 </body>

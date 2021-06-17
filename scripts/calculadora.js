@@ -5,14 +5,14 @@ let lastExp;
 let statusFalha = false;
 const visorContainer = document.getElementById("visorContainer");
 const visor = document.getElementById("visor");
-const visorTemp = document.getElementById("visor-temp");
-const historico = document.getElementById("historico-list");
+const visorTemp = document.getElementById("visorTemp");
+const historico = document.getElementById("historicoList");
 
 visor.addEventListener('focus', visorFocus);
 visor.addEventListener('focusout', visorFocusOut);
 
 document.getElementsByName("button").forEach(f => (f.addEventListener("click", pegaElementoValue)));
-// document.getElementsByName("historico-temp").forEach(f => (f.addEventListener("dblclick", voltaInput)));
+// document.getElementsByName("historico-temp").forEach(f => (f.addEventListener("dblclick", recuperaDadosHistoricoInput)));
 document.addEventListener('keypress', eventoTecladoKeyPress);
 document.addEventListener('keydown', eventoTecladoKeyDown);
 
@@ -25,7 +25,7 @@ function visorFocusOut() {
     visorContainer.classList.remove("visor-active");
 }
 
-export function voltaInput(e) {
+export function recuperaDadosHistoricoInput(e) {
     visor.value = e.toElement.innerText;
     visorTemp.value = "result: 0";
     preCalcular();
@@ -105,7 +105,7 @@ function salvarExpressao(valor) {
     /**
      * Adiciona evento DoubleClick nos inputs name historico-temp
      */
-    document.getElementsByName("historico-temp").forEach(f => (f.addEventListener("dblclick", voltaInput)));
+    document.getElementsByName("historico-temp").forEach(f => (f.addEventListener("dblclick", recuperaDadosHistoricoInput)));
 }
 
 function calcular() {
@@ -120,14 +120,13 @@ function preCalcular() {
         statusFalha = false;
         const expresao = trataExpressao(visor.value)
         value = eval(expresao);
-        visorContainer.classList.remove("errorOperation");
+        visorContainer.classList.remove("error-operation");
     } catch (e) {
         console.log(e.message);
         statusFalha = true;
-        visorContainer.classList.add("errorOperation");
+        visorContainer.classList.add("error-operation");
     }
 
     visorTemp.innerHTML = "result: " + value;
     return value;
 }
-
