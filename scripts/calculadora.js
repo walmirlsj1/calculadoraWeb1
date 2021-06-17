@@ -33,7 +33,7 @@ export function recuperaDadosHistoricoInput(e) {
 
 function eventoTecladoKeyDown(evt) {
     if (evt.target.className != "visor" && evt.keyCode == 8) { // Tecla Backspace
-        actionCalcular("CE");
+        processarEntrada("CE");
         evt.preventDefault();
     } else if (evt.keyCode == 27) { // Tecla ESC limpa os campos
         visor.value = "";
@@ -47,28 +47,28 @@ function eventoTecladoKeyPress(keyEvent) {
     const keyName = keyEvent.key;
 
     if (key == 47) {
-        actionCalcular('÷');
+        processarEntrada('÷');
     } else if ((key > 47 && key <= 57)
         || key == 37
         || key == 42 || key == 45
         || key == 43 || key == 40
         || key == 41
     ) {
-        actionCalcular(keyName);
+        processarEntrada(keyName);
     } else if (key == 13 || key == 43) {
-        actionCalcular('=');
+        processarEntrada('=');
     } else if (key == 46 || key == 44) {
-        actionCalcular('.');
+        processarEntrada('.');
     } else {
         keyEvent.preventDefault();
     }
 }
 
 function pegaElementoValue(elementEvent) {
-    actionCalcular(elementEvent.toElement.innerHTML);
+    processarEntrada(elementEvent.toElement.innerHTML);
 }
 
-function actionCalcular(entrada) {
+function processarEntrada(entrada) {
     switch (entrada) {
         case "CE":
             if (visor.value.length > 0) {
@@ -114,11 +114,11 @@ function calcular() {
 }
 
 function preCalcular() {
-    let value = NaN;
+    let resultado = NaN;
     try {
         statusFalha = false;
         const expresao = trataExpressao(visor.value)
-        value = eval(expresao);
+        resultado = eval(expresao);
         visorContainer.classList.remove("error-operation");
     } catch (e) {
         console.log(e.message);
@@ -126,6 +126,6 @@ function preCalcular() {
         visorContainer.classList.add("error-operation");
     }
 
-    visorTemp.innerHTML = "result: " + value;
-    return value;
+    visorTemp.innerHTML = "result: " + resultado;
+    return resultado;
 }
