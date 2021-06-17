@@ -1,4 +1,3 @@
-// import {maquinaCalculadora} from './maquina.js';
 import {trataExpressao} from "./tratamento.js";
 
 let lastExp;
@@ -45,14 +44,14 @@ function eventoTecladoKeyPress(keyEvent) {
 
     const key = keyEvent.keyCode;
     const keyName = keyEvent.key;
-
+    console.log(key);
     if (key == 47) {
         processarEntrada('÷');
     } else if ((key > 47 && key <= 57)
         || key == 37
         || key == 42 || key == 45
         || key == 43 || key == 40
-        || key == 41
+        || key == 41 || key == 101
     ) {
         processarEntrada(keyName);
     } else if (key == 13 || key == 43) {

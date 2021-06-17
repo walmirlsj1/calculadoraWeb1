@@ -10,6 +10,10 @@ function trataExpressao(expressao) {
      */
     expressao = expressao.replaceAll('÷', '/');
 
+    return alteraTodasPorcentagem(expressao);
+}
+
+function alteraTodasPorcentagem(expressao) {
     const regexp = RegExp(/[0-9]+\%/g, 'g');
 
     const listaItemPorcentagem = expressao.match(regexp);
