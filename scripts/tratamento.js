@@ -10,14 +10,14 @@ function trataExpressao(expressao) {
      */
     expressao = expressao.replaceAll('÷', '/');
 
-    const regexp = RegExp(/[0-9]*\%/g, 'g');
+    const regexp = RegExp(/[0-9]+\%/g, 'g');
 
     const listaItemPorcentagem = expressao.match(regexp);
 
     if (listaItemPorcentagem != null && listaItemPorcentagem.length > 0) {
         listaItemPorcentagem.forEach(v =>
             expressao = expressao
-                .replace(v, v.replace(/[^0-9]/g, '') + "/100")
+                .replace(v, v.replace(/[0-9]/g, '') + "/100")
         );
     }
     return expressao;
